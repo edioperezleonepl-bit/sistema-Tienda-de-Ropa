@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: fashionstore-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-FashionStore2026Secure!}
+      POSTGRES_DB: fashionstore
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - fashionstore-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fashionstore-backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: ${DB_PASSWORD:-FashionStore2026Secure!}
+      DB_DATABASE: fashionstore
+      JWT_SECRET: ${JWT_SECRET:-FashionStoreSuperSecret2026Key}
+    ports:
+      - "3000:3000"
+    networks:
+      - fashionstore-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fashionstore-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - fashionstore-net
+
+networks:
+  fashionstore-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
