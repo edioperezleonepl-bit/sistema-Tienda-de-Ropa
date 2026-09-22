@@ -1,7 +1,7 @@
 # DOCUMENTACIÓN DEL PROYECTO: PLATAFORMA INTELIGENTE FASHIONSTORE
 
 **Materia:** Sistemas II  
-**Docente:** MSc. Ing. Angélica Garzón Cuéllar  
+**Docente:** MSc. Ing. rolando Antonio Martinez  
 **Plataforma:** FashionStore — Comercio Electrónico Omnicanal con Vestidores Virtuales AR e IA  
 **Stack Implementado:** NestJS (Backend), React (Web), React Native (Móvil), PostgreSQL (Base de Datos), Azure (Despliegue en la Nube).
 

@@ -33,21 +33,32 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       overflow: 'hidden',
       height: '100%',
     }}>
-      {/* Product Image & Badges */}
-      <div style={{ position: 'relative', width: '100%', paddingTop: '125%', overflow: 'hidden' }}>
+      {/* Product Image Showcase (Gucci Packshot Format - Sola prenda y fondo limpio) */}
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        paddingTop: '112%',
+        backgroundColor: '#ffffff',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
         <img
           src={mainImage}
           alt={product.name}
           style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transition: 'transform 0.4s ease',
+            top: '8%',
+            left: '8%',
+            width: '84%',
+            height: '84%',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 16px 26px rgba(0, 0, 0, 0.14))',
+            transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
           onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
         />
 

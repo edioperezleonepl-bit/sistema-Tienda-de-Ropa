@@ -1,11 +1,9 @@
 import { Platform } from 'react-native';
 
-// En emulador Android se usa 10.0.2.2, en iOS localhost o la IP de red local
-export const API_BASE_URL = Platform.select({
-  android: 'http://10.0.2.2:3000/api',
-  ios: 'http://localhost:3000/api',
-  default: 'http://localhost:3000/api',
-});
+// IP de red local de tu PC para que el celular físico pueda conectarse al backend
+const HOST_IP = '192.168.0.4';
+
+export const API_BASE_URL = `http://${HOST_IP}:3000/api`;
 
 export interface ProductVariant {
   id: string;
