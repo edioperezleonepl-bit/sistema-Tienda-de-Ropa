@@ -28,6 +28,7 @@ export const CatalogScreen: React.FC<CatalogScreenProps> = ({
 }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categories, setCategories] = useState<any[]>([]);
@@ -38,26 +39,31 @@ export const CatalogScreen: React.FC<CatalogScreenProps> = ({
 
   const loadCatalog = async () => {
     setLoading(true);
+    setErrorMsg(null);
     try {
       const url = `${API_BASE_URL}/catalog/products?${selectedBranch ? `branchId=${selectedBranch.id}` : ''}${selectedCategory ? `&categoryId=${selectedCategory}` : ''}`;
       const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setProducts(data);
+      setProducts(Array.isArray(data) ? data : []);
 
       const catRes = await fetch(`${API_BASE_URL}/catalog/categories`);
-      const cats = await catRes.json();
-      setCategories(cats);
-    } catch (err) {
+      if (catRes.ok) {
+        const cats = await catRes.json();
+        setCategories(Array.isArray(cats) ? cats : []);
+      }
+    } catch (err: any) {
       console.error(err);
+      setErrorMsg(err.message || 'Error de conexión con el backend');
     } finally {
       setLoading(false);
     }
   };
 
-  const filtered = products.filter(
+  const filtered = (products || []).filter(
     (p) =>
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.sku.toLowerCase().includes(search.toLowerCase()),
+      p.name?.toLowerCase().includes(search.toLowerCase()) ||
+      p.sku?.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -110,6 +116,18 @@ export const CatalogScreen: React.FC<CatalogScreenProps> = ({
       {/* Product List */}
       {loading ? (
         <ActivityIndicator size="large" color="#d4af37" style={{ marginTop: 40 }} />
+      ) : filtered.length === 0 ? (
+        <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 50, paddingHorizontal: 24 }}>
+          <Text style={{ color: '#94a3b8', fontSize: 14, textAlign: 'center', marginBottom: 16 }}>
+            {errorMsg ? `No se pudo conectar al backend:\n${errorMsg}` : 'No se encontraron prendas disponibles.'}
+          </Text>
+          <TouchableOpacity
+            onPress={loadCatalog}
+            style={{ backgroundColor: '#d4af37', paddingHorizontal: 22, paddingVertical: 10, borderRadius: 8 }}
+          >
+            <Text style={{ color: '#0b0f19', fontWeight: 'bold' }}>Reintentar Conexión</Text>
+          </TouchableOpacity>
+        </View>
       ) : (
         <FlatList
           data={filtered}
