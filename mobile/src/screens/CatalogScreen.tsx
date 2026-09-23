@@ -11,7 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Sparkles, Eye, Calendar, ShoppingBag, Search, Store } from 'lucide-react-native';
-import { Product, ProductVariant, Branch, API_BASE_URL } from '../services/api';
+import { Product, ProductVariant, Branch, API_BASE_URL, resolveImageUrl } from '../services/api';
 
 interface CatalogScreenProps {
   selectedBranch: Branch | null;
@@ -122,7 +122,7 @@ export const CatalogScreen: React.FC<CatalogScreenProps> = ({
 
             return (
               <View style={styles.card}>
-                <Image source={{ uri: images[0] }} style={styles.cardImage} />
+                <Image source={{ uri: resolveImageUrl(images[0]) }} style={styles.cardImage} />
 
                 <View style={styles.cardBody}>
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>

@@ -8,14 +8,17 @@ import {
   Building,
   Layers,
   RefreshCw,
+  Plus,
 } from 'lucide-react';
 import { api } from '../services/api.js';
+import { CreateProductModal } from './CreateProductModal.js';
 
 export const AdminDashboardView: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([]);
   const [consolidatedStock, setConsolidatedStock] = useState<any[]>([]);
   const [aiReport, setAiReport] = useState<any | null>(null);
   const [loadingAi, setLoadingAi] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   useEffect(() => {
     loadDashboardData();
@@ -65,18 +68,34 @@ export const AdminDashboardView: React.FC = () => {
             <TrendingUp color="var(--accent-gold)" /> Panel de Control Administrativo
           </h2>
           <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            Supervisión integral de ventas, inventario multinivel y análisis inteligente FashionStore
+            Supervisión integral de ventas, inventario multinivel y análisis inteligente Moda Shopping
           </span>
         </div>
 
-        <button
-          onClick={generateAiReport}
-          className="btn btn-primary"
-          disabled={loadingAi}
-        >
-          <Sparkles size={16} />
-          {loadingAi ? 'Generando Reporte IA...' : 'Generar Análisis Ejecutivo con IA'}
-        </button>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <button
+            onClick={() => setIsCreateOpen(true)}
+            className="btn btn-primary"
+            style={{
+              background: 'var(--accent-gold-gradient)',
+              color: '#0b0f19',
+              fontWeight: 700,
+              boxShadow: 'var(--shadow-glow)',
+            }}
+          >
+            <Plus size={16} strokeWidth={2.5} />
+            <span>+ Nueva Prenda</span>
+          </button>
+
+          <button
+            onClick={generateAiReport}
+            className="btn btn-secondary"
+            disabled={loadingAi}
+          >
+            <Sparkles size={16} />
+            {loadingAi ? 'Generando Reporte IA...' : 'Generar Análisis Ejecutivo con IA'}
+          </button>
+        </div>
       </div>
 
       {/* KPI Cards Grid */}
@@ -218,6 +237,14 @@ export const AdminDashboardView: React.FC = () => {
           </table>
         </div>
       </div>
+      {/* Modal para Crear Prenda */}
+      <CreateProductModal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        onSuccess={() => {
+          loadDashboardData();
+        }}
+      />
     </div>
   );
 };

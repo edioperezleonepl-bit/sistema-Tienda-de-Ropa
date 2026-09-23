@@ -8,8 +8,10 @@ import {
   Supplier,
   Product,
   ProductVariant,
+  ARAnchorType,
 } from '../entities/catalog.entity.js';
 import { BranchInventory } from '../entities/inventory.entity.js';
+import { Branch } from '../entities/branch.entity.js';
 
 @Injectable()
 export class CatalogService {
@@ -176,6 +178,7 @@ export class CatalogService {
     arModel3dUrl?: string;
     arAnchorType?: any;
     isFeatured?: boolean;
+    initialStockPerBranch?: number;
     variants?: {
       size: string;
       colorName: string;
@@ -184,9 +187,23 @@ export class CatalogService {
       priceAdjustment?: number;
     }[];
   }) {
-    const { variants, ...productData } = data;
-    const product = this.productRepo.create(productData);
-    const savedProduct = await this.productRepo.save(product);
+    const { variants, initialStockPerBranch, ...productData } = data;
+
+    // Normalizar ARAnchorType a mayúsculas
+    if (productData.arAnchorType) {
+      const anchorUpper = String(productData.arAnchorType).toUpperCase();
+      if (['TORSO', 'LEGS', 'FULL_BODY', 'HEAD', 'FEET'].includes(anchorUpper)) {
+        productData.arAnchorType = anchorUpper as any;
+      } else {
+        productData.arAnchorType = ARAnchorType.TORSO;
+      }
+    } else {
+      productData.arAnchorType = ARAnchorType.TORSO;
+    }
+
+    try {
+      const product = this.productRepo.create(productData);
+      const savedProduct = await this.productRepo.save(product);
 
     if (variants && variants.length > 0) {
       const variantEntities = variants.map((v) =>
@@ -196,9 +213,31 @@ export class CatalogService {
         }),
       );
       savedProduct.variants = await this.variantRepo.save(variantEntities);
+
+      // Asignar existencias iniciales en todas las sucursales
+      const stockQty = initialStockPerBranch !== undefined ? Number(initialStockPerBranch) : 12;
+      if (stockQty > 0) {
+        const branches = await this.inventoryRepo.manager.find(Branch);
+        for (const variant of savedProduct.variants) {
+          for (const branch of branches) {
+            await this.inventoryRepo.save(
+              this.inventoryRepo.create({
+                branchId: branch.id,
+                variantId: variant.id,
+                stockQuantity: stockQty,
+                reservedQuantity: 0,
+              }),
+            );
+          }
+        }
+      }
     }
 
-    return this.getProductById(savedProduct.id);
+      return this.getProductById(savedProduct.id);
+    } catch (err) {
+      console.error('ERROR AL CREAR PRODUCTO:', err);
+      throw err;
+    }
   }
 
   async updateProduct(id: string, data: Partial<Product>) {

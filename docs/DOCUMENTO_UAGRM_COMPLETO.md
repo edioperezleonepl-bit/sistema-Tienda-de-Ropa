@@ -3,7 +3,7 @@
 
 **MATERIA:** Sistemas II  
 **DOCENTE:** MSc. Ing. Rolando Antonio Martínez  
-**TRABAJO:** PRIMER PARCIAL — ECOMMERCE PARA UNA FRANQUICIA DE TIENDAS DE ROPA (FASHIONSTORE)  
+**TRABAJO:** PRIMER PARCIAL — ECOMMERCE PARA UNA FRANQUICIA DE TIENDAS DE ROPA (MODA SHOPPING)  
 **GRUPO #3**  
 **INTEGRANTES:**  
 - Alvarado Balderrama José Manuel — Registro: 222052384  
@@ -63,7 +63,7 @@
 
 # MÓDULOS DEL SISTEMA
 
-El sistema **FashionStore** se estructura en seis módulos funcionales interconectados:
+El sistema **Moda Shopping** se estructura en seis módulos funcionales interconectados:
 
 1. **Módulo de Seguridad y Gestión de Usuarios:** Control de acceso basado en roles (RBAC) con tokens JWT. Maneja las cuentas de Clientes, Cajeros, Encargados de Sucursal, Administradores y Proveedores.
 2. **Módulo de Sucursales y Ubicaciones Geográficas:** Administra ciudades (Santa Cruz, La Paz, Cochabamba) y tiendas físicas, definiendo dirección, capacidad física de probadores y horarios de apertura y cierre.
@@ -78,7 +78,7 @@ El sistema **FashionStore** se estructura en seis módulos funcionales intercone
 
 Un Sistema de Información Basado en Computadoras (SIBC) se compone de seis elementos esenciales integrados armónicamente:
 
-| Elemento | Descripción en el Proyecto FashionStore |
+| Elemento | Descripción en el Proyecto Moda Shopping |
 | :--- | :--- |
 | **1. Hardware** | Servidores en la nube de Microsoft Azure (procesadores vCPU, memoria RAM y almacenamiento SSD), computadoras de escritorio y terminales de caja POS en sucursales, dispositivos móviles smartphone de clientes con cámara fotográfica y laptops para acceso web. |
 | **2. Software** | - **Backend:** Node.js v24 con framework NestJS.<br>- **Base de Datos:** Motor relacional PostgreSQL v16.<br>- **Frontend Web:** React 19 con TypeScript y Vite.<br>- **Frontend Móvil:** React Native con Expo SDK 52+ y `expo-camera`.<br>- **Infraestructura:** Docker Engine, Nginx y Azure App Service. |
@@ -130,7 +130,7 @@ Para responder a los requisitos contemporáneos de rendimiento y alta disponibil
 - **Reducción del tiempo de espera en sucursales:** El encargado prepara las prendas antes de que el cliente ingrese a la tienda.
 
 ### 2. Beneficios Intangibles (Cualitativos)
-- **Posicionamiento y prestigio de marca:** Percepción de FashionStore como una cadena tecnológica de vanguardia y moda innovadora.
+- **Posicionamiento y prestigio de marca:** Percepción de Moda Shopping como una cadena tecnológica de vanguardia y moda innovadora.
 - **Hiper-personalización de la experiencia:** El cliente se siente asesorado por un estilista con inteligencia artificial en cualquier momento.
 - **Fidelización y confianza:** Menos fricción y frustración en compras de ropa por Internet.
 
@@ -613,7 +613,7 @@ Se aplicaron pruebas automatizadas y funcionales de extremo a extremo:
 
 # CONCLUSIÓN
 
-1. La plataforma **FashionStore** demuestra la viabilidad técnica y comercial de un modelo omnicanal que conecta el comercio electrónico con las tiendas físicas, eliminando las pérdidas por devoluciones mediante **Realidad Aumentada**.
+1. La plataforma **Moda Shopping** demuestra la viabilidad técnica y comercial de un modelo omnicanal que conecta el comercio electrónico con las tiendas físicas, eliminando las pérdidas por devoluciones mediante **Realidad Aumentada**.
 2. La arquitectura moderna basada en **NestJS, React, React Native y PostgreSQL** garantiza un alto desempeño transaccional, modularidad y total independencia de CMS prefabricados.
 3. La estrategia de despliegue sobre **Microsoft Azure** asegura que la solución esté lista para producción en la nube, cumpliendo los más rigurosos estándares de la ingeniería de software moderna bajo el marco del **PUDS** y **UML 2.5+**.
 

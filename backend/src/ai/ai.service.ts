@@ -80,7 +80,7 @@ export class AiService {
     } else if (lower.includes('talla') || lower.includes('medida')) {
       reply = `Nuestras prendas cuentan con patronaje ergonómico latinoamericano. Para un calce regular te sugiero tu talla habitual (M/L), o puedes usar el botón de Vestidor Virtual AR para proyectar la prenda directamente en tu cuerpo con la cámara.`;
     } else {
-      reply = `Hola, soy tu Asistente Inteligente de Moda en FashionStore. ¿Buscas un look para alguna ocasión especial (trabajo, fiesta, fin de semana), o deseas que te recomiende combinaciones según tu color favorito?`;
+      reply = `Hola, soy tu Asistente Inteligente de Moda en Moda Shopping. ¿Buscas un look para alguna ocasión especial (trabajo, fiesta, fin de semana), o deseas que te recomiende combinaciones según tu color favorito?`;
     }
 
     if (suggestedProducts.length === 0) {
@@ -100,7 +100,7 @@ export class AiService {
     const totalRevenue = orders.reduce((sum, o) => sum + Number(o.total || 0), 0);
     const totalReservations = await this.reservationRepo.count();
 
-    const analysisText = `Análisis Generativo FashionStore:
+    const analysisText = `Análisis Generativo Moda Shopping:
 - Se han registrado ${totalOrders} transacciones por un valor acumulado de $${totalRevenue.toFixed(2)}.
 - La plataforma ha canalizado ${totalReservations} reservas a vestidores físicos, evidenciando una sinergia efectiva entre el canal digital y presencial.
 - El 68% de los usuarios que utilizan el vestidor virtual AR completan una reserva o compra, lo que confirma un retorno positivo de la experiencia inmersiva.

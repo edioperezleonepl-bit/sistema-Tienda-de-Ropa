@@ -121,7 +121,7 @@ export default function App() {
             <Sparkles size={16} color="#0b0f19" />
           </View>
           <Text style={styles.brandTitle}>
-            FASHION<Text style={{ color: '#d4af37' }}>STORE</Text>
+            MODA <Text style={{ color: '#d4af37' }}>SHOPPING</Text>
           </Text>
         </View>
 

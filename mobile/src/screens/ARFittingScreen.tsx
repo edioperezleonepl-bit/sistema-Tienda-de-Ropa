@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import { Sparkles, Camera, RefreshCw, Calendar, ShoppingBag, X } from 'lucide-react-native';
-import { Product, ProductVariant } from '../services/api';
+import { Product, ProductVariant, resolveImageUrl } from '../services/api';
 
 interface ARFittingScreenProps {
   product?: Product;
@@ -34,7 +34,7 @@ export const ARFittingScreen: React.FC<ARFittingScreenProps> = ({
   const [selectedSize, setSelectedSize] = useState(variant?.size || 'M');
 
   const images = product?.imagesJson ? JSON.parse(product.imagesJson) : [];
-  const overlayUrl = product?.arOverlayImageUrl || images[0];
+  const overlayUrl = resolveImageUrl(product?.arOverlayImageUrl || images[0]);
 
   if (!permission) {
     return <View style={styles.container} />;
@@ -46,7 +46,7 @@ export const ARFittingScreen: React.FC<ARFittingScreenProps> = ({
         <Sparkles size={36} color="#d4af37" />
         <Text style={styles.permissionTitle}>Permiso de Cámara Requerido</Text>
         <Text style={styles.permissionDesc}>
-          Para utilizar el probador virtual con Realidad Aumentada sobre tu cuerpo, FashionStore necesita acceso a la cámara.
+          Para utilizar el probador virtual con Realidad Aumentada sobre tu cuerpo, Moda Shopping necesita acceso a la cámara.
         </Text>
         <TouchableOpacity style={styles.btnGold} onPress={requestPermission}>
           <Text style={styles.btnGoldText}>Permitir Cámara</Text>

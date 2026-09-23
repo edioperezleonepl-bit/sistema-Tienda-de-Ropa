@@ -393,7 +393,7 @@ export const POSView: React.FC<POSViewProps> = ({ branches, selectedBranch }) =>
         <div className="modal-backdrop">
           <div className="modal-content" style={{ maxWidth: 440, padding: '24px', background: '#fff', color: '#111' }}>
             <div style={{ textAlign: 'center', borderBottom: '2px dashed #ccc', paddingBottom: 12, marginBottom: 12 }}>
-              <h2 style={{ fontSize: '1.25rem', margin: 0, fontWeight: 800, color: '#000' }}>FASHIONSTORE S.A.</h2>
+              <h2 style={{ fontSize: '1.25rem', margin: 0, fontWeight: 800, color: '#000' }}>MODA SHOPPING S.A.</h2>
               <div style={{ fontSize: '0.75rem', color: '#555' }}>SUCURSAL: {selectedBranch?.name}</div>
               <div style={{ fontSize: '0.75rem', color: '#555' }}>{selectedBranch?.address}</div>
               <div style={{ fontSize: '0.8rem', fontWeight: 700, marginTop: 6, color: '#000' }}>

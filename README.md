@@ -1,4 +1,4 @@
-# FashionStore — Plataforma Inteligente de Comercio Electrónico con Vestidores Virtuales AR
+# Moda Shopping — Plataforma Inteligente de Comercio Electrónico con Vestidores Virtuales AR
 
 Plataforma integral de comercio electrónico de moda con **vestidores virtuales mediante Realidad Aumentada**, gestión de sucursales físicas, reservas de vestidores, puntos de venta en caja (POS), pasarela digital y asistente de moda con inteligencia artificial.
 

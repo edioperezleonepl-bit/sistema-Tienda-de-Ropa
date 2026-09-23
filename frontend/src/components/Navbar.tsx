@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               letterSpacing: '0.05em',
               fontFamily: 'var(--font-serif)',
             }}>
-              FASHION<span className="gold-gradient-text">STORE</span>
+              MODA <span className="gold-gradient-text">SHOPPING</span>
             </div>
             <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
               AR & Smart Boutique

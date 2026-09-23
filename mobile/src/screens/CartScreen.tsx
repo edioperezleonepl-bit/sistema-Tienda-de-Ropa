@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { Trash2, CreditCard, QrCode, CheckCircle, ShoppingBag } from 'lucide-react-native';
-import { Product, ProductVariant, API_BASE_URL } from '../services/api';
+import { Product, ProductVariant, API_BASE_URL, resolveImageUrl } from '../services/api';
 
 export interface MobileCartItem {
   product: Product;
@@ -138,7 +138,7 @@ export const CartScreen: React.FC<CartScreenProps> = ({
               const price = Number(item.product.basePrice) + Number(item.variant.priceAdjustment || 0);
               return (
                 <View style={styles.cartCard}>
-                  <Image source={{ uri: images[0] }} style={styles.itemImage} />
+                  <Image source={{ uri: resolveImageUrl(images[0]) }} style={styles.itemImage} />
                   <View style={{ flex: 1 }}>
                     <Text style={styles.itemName}>{item.product.name}</Text>
                     <Text style={styles.itemMeta}>

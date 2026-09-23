@@ -1,9 +1,14 @@
 import { Platform } from 'react-native';
 
-// IP de red local de tu PC para que el celular físico pueda conectarse al backend
-const HOST_IP = '192.168.0.4';
+// Dirección IP del backend en la nube
+export const API_BASE_URL = 'http://135.222.42.88:3000/api';
 
-export const API_BASE_URL = `http://${HOST_IP}:3000/api`;
+export const resolveImageUrl = (path?: string) => {
+  if (!path) return 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800';
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  const baseUrl = API_BASE_URL.replace(/\/api\/?$/, '');
+  return `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+};
 
 export interface ProductVariant {
   id: string;

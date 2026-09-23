@@ -9,11 +9,13 @@ import {
   ShoppingBag,
   CalendarCheck,
   RefreshCw,
+  Plus,
 } from 'lucide-react';
 import { Navbar } from './components/Navbar.js';
 import { ProductCard } from './components/ProductCard.js';
 import { ARVirtualFittingModal } from './components/ARVirtualFittingModal.js';
 import { ReservationModal } from './components/ReservationModal.js';
+import { CreateProductModal } from './components/CreateProductModal.js';
 import { CartDrawer, CartItem } from './components/CartDrawer.js';
 import { POSView } from './components/POSView.js';
 import { BranchManagerView } from './components/BranchManagerView.js';
@@ -42,6 +44,7 @@ export function App() {
   // Modals
   const [arModal, setArModal] = useState<{ product: Product; variant: ProductVariant } | null>(null);
   const [reservationModal, setReservationModal] = useState<{ product?: Product; variant?: ProductVariant } | null>(null);
+  const [isCreateProductOpen, setIsCreateProductOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
 
   useEffect(() => {
@@ -243,6 +246,25 @@ export function App() {
                     }}
                   />
                 </div>
+
+                {currentRole === 'ADMIN' && (
+                  <button
+                    onClick={() => setIsCreateProductOpen(true)}
+                    className="btn btn-sm btn-primary"
+                    style={{
+                      background: 'var(--accent-gold-gradient)',
+                      color: '#0b0f19',
+                      fontWeight: 700,
+                      boxShadow: 'var(--shadow-glow)',
+                      whiteSpace: 'nowrap',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 6,
+                    }}
+                  >
+                    <Plus size={15} strokeWidth={2.5} /> + Nueva Prenda
+                  </button>
+                )}
               </div>
 
               {/* Branch Notification Bar */}
@@ -409,6 +431,15 @@ export function App() {
         onOpenAR={(prod, v) => setArModal({ product: prod, variant: v })}
       />
 
+      {/* Modal para Crear Prenda */}
+      <CreateProductModal
+        isOpen={isCreateProductOpen}
+        onClose={() => setIsCreateProductOpen(false)}
+        onSuccess={() => {
+          loadProducts();
+        }}
+      />
+
       {/* Footer */}
       <footer style={{
         backgroundColor: '#070a12',
@@ -419,7 +450,7 @@ export function App() {
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
           <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            © 2026 <strong>FashionStore</strong> — Plataforma Inteligente con Realidad Aumentada e IA.
+            © 2026 <strong>Moda Shopping</strong> — Plataforma Inteligente con Realidad Aumentada e IA.
           </div>
           <div style={{ display: 'flex', gap: 16, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
             <span>Backend: <strong>NestJS + PostgreSQL</strong></span>
